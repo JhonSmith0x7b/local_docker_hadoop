@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+    hadoop01:
+        build: ./hadoop_docker/
+        privileged: true
+        expose:
+            - "22"
+        ports:
+            - "9870:9870"
+            - "8088:8088"
+        networks:
+            test_sub:
+                ipv4_address: 192.168.0.2
+    hadoop02:
+        build: ./hadoop_docker/
+        privileged: true
+        expose:
+            - "22"
+        networks:
+            test_sub:
+                ipv4_address: 192.168.0.3
+            
+networks:
+    test_sub:
+        ipam:
+            config:
+                - subnet: 192.168.0.0/28
